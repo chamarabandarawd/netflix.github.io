@@ -21,17 +21,17 @@ function App() {
         console.log("This user already in", userAuth);
         dispatch(login({
           uid: userAuth.id,
-          email:userAuth.email,
+          email: userAuth.email,
         }));
       } else {
         // Logged out
-        dispatch(logout);
+        dispatch(logout());
       }
     });
 
     return unsubcribe;
 
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="app">
@@ -40,11 +40,10 @@ function App() {
           <LoginScreen />
         ) : (
           <Routes>
-            <Route path='/profile'>
-              <ProfileScreen/>
+            <Route exact path='/' element={<HomeScreen />}>
+              {console.log("in home")}
             </Route>
-
-            <Route exact path='/' element={<HomeScreen />} />
+            <Route path='profile' element = {<ProfileScreen/>}/>
           </Routes>
         )}
       </Router>
